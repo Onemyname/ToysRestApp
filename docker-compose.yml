@@ -8,7 +8,7 @@ services:
     volumes:
       - mongodb-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_USERNAME: onemyname
       MONGO_INITDB_ROOT_PASSWORD: knopka9955
 
 volumes:

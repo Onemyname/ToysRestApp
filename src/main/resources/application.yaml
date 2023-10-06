@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      username: onemyname
+      password: knopka9955
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      database: toys-db
