@@ -53,6 +53,8 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id) {
+        
         productRepository.deleteById(String.valueOf(id));
+        log.info(String.format("Product with id %s was updated", id));
     }
 }
