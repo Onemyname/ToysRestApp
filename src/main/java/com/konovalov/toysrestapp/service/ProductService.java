@@ -27,8 +27,8 @@ public class ProductService {
         log.info("Product was saved with id: " + product.getId());
     }
 
-    public ProductResponse getProductById(Long id) {
-        Optional<Product> maybeProduct = productRepository.findById(String.valueOf(id));
+    public ProductResponse getProductById(String id) {
+        Optional<Product> maybeProduct = productRepository.findById(id);
         Product product = maybeProduct
                 .orElseThrow(() -> new ProductNotFoundException("Product with this id: " + id + " wasn`t found"));
         log.info("Product was got with id: " + id);
@@ -42,8 +42,8 @@ public class ProductService {
         return productMapper.fromProductListToProductReponseList(products);
     }
 
-    public void updateProduct(Long id, ProductRequest productRequest){
-        Optional<Product> optionalProduct = productRepository.findById(String.valueOf(id));
+    public void updateProduct(String id, ProductRequest productRequest){
+        Optional<Product> optionalProduct = productRepository.findById(id);
         Product product = optionalProduct
                 .orElseThrow(() -> new ProductNotFoundException("Product with this id: " + id + " wasn`t found"));
 
@@ -52,9 +52,9 @@ public class ProductService {
         log.info(String.format("Product with id %s was updated", product.getId()));
     }
 
-    public void deleteProduct(Long id) {
-        
-        productRepository.deleteById(String.valueOf(id));
+    public void deleteProduct(String id) {
+
+        productRepository.deleteById(id);
         log.info(String.format("Product with id %s was updated", id));
     }
 }
