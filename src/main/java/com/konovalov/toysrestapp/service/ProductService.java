@@ -29,7 +29,8 @@ public class ProductService {
 
     public ProductResponse getProductById(Long id) {
         Optional<Product> maybeProduct = productRepository.findById(String.valueOf(id));
-        Product product = maybeProduct.orElseThrow(() -> new ProductNotFoundException("Product with this id: " + id + " wasn`t found"));
+        Product product = maybeProduct
+                .orElseThrow(() -> new ProductNotFoundException("Product with this id: " + id + " wasn`t found"));
         log.info("Product was got with id: " + id);
 
         return productMapper.fromProductToResponse(product);
@@ -39,5 +40,19 @@ public class ProductService {
         List<Product> products = productRepository.findAll();
 
         return productMapper.fromProductListToProductReponseList(products);
+    }
+
+    public void updateProduct(Long id, ProductRequest productRequest){
+        Optional<Product> optionalProduct = productRepository.findById(String.valueOf(id));
+        Product product = optionalProduct
+                .orElseThrow(() -> new ProductNotFoundException("Product with this id: " + id + " wasn`t found"));
+
+        productMapper.updateProduct(product, productRequest);
+        productRepository.save(product);
+        log.info(String.format("Product with id %s was updated", product.getId()));
+    }
+
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(String.valueOf(id));
     }
 }
